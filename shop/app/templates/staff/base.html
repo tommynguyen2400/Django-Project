@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="/static/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/vue.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="https://kit.fontawesome.com/e2db74ebd5.js" crossorigin="anonymous"></script>
+
+{% block navbar %}
+<div class="bg-primary">
+    <div>
+        <nav class="navbar navbar-expand navbar-dark bg-primary p-0">
+            <ul class="navbar-nav ml-3">
+                <li class="nav-item {% if page == 0 %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'product-list' %}">Quản lý sản phẩm</a>
+                </li>
+                <li class="nav-item {% if page == 1 %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'manufacturer-list' %}">Quản lý hãng sản xuất</a>
+                </li>
+                <li class="nav-item {% if page == 2 %} active {% endif %}">
+                    <a class="nav-link" href="/list_order">Quản lý đơn hàng</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto mr-3">
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle p-0" data-toggle="dropdown" href="#">
+                        <img class="rounded-circle" style="width:60px" src="/static/images/user1.png">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="infor.html">
+              Thông tin tài khoản
+            </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/accounts/logout">
+              Đăng xuất
+            </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %} {%block content%} {% endblock %}

@@ -1,0 +1,17 @@
+<!--app/templates/order/confirm.ht-->
+{%extends "staff/base.html" %} {%block navbar%} {%with page=3%} {{block.super}} {%endwith%} {%endblock%} {%block content %}
+<form method="POST">
+    {%csrf_token%}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-3">
+                <label>Thời điểm giao hàng:</label>
+            </div>
+            <div class="col-3">
+                <input type="datetime-local" class="form-control" name="deliverDate"> {{form.deliverDate.errors}}
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Xác nhận</button>
+    </div>
+</form>
+{%endblock%}

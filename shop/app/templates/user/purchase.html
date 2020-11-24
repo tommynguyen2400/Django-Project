@@ -1,0 +1,284 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="/static/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/vue.js"></script>
+<script src="/static/js/main.js"></script>
+<script src="https://kit.fontawesome.com/e2db74ebd5.js" crossorigin="anonymous"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .navbar {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    nav {
+        flex: 1;
+        text-align: right;
+    }
+    
+    nav ul {
+        display: inline-block;
+        list-style-type: none;
+    }
+    
+    nav ul li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    
+    p {
+        color: black;
+    }
+    
+    .row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .col-2 {
+        flex-basis: 50%;
+        min-width: 500px;
+    }
+    
+    .col-2 img {
+        max-width: 100%;
+        padding: 50px 0;
+    }
+    
+    .col-2 h1 {
+        font-size: 50px;
+        line-height: 60px;
+        margin: 25px 0;
+    }
+    
+    .header {
+        background: radial-gradient(black, black);
+    }
+    
+    .header .row {
+        margin-top: 70px;
+    }
+    
+    .small-container {
+        max-width: 1080px;
+        margin: auto;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    
+    h4 {
+        color: black;
+        font-weight: normal;
+    }
+    /*-------- footer ---------*/
+    
+    .footer {
+        background: black;
+        color: white;
+        font-size: 15px;
+        padding: 60px 0 20px;
+    }
+    
+    .footer p {
+        color: white;
+        margin-bottom: 20px;
+    }
+    
+    .footer-col-1,
+    footer-col-2 {
+        min-width: 200px;
+        margin-bottom: 10px;
+    }
+    
+    .footer-col-1 {
+        text-align: center;
+    }
+    
+    .footer-col-2 {
+        text-align: center;
+    }
+    
+    ul {
+        list-style-type: none;
+    }
+    
+    .footer hr {
+        border: none;
+        background: black;
+        height: 2px;
+        margin: 20px 0;
+    }
+    
+    .copyright {
+        text-align: center;
+    }
+    /*--------- all products --------*/
+    
+    .row-2 {
+        justify-content: space-between;
+        margin: 100px auto 50px;
+    }
+    
+    .price-title {
+        font-style: italic;
+        font-size: 14px;
+    }
+    
+    .price {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .btn {
+        display: inline-block;
+        background: rgb(83, 20, 255);
+        color: black;
+        padding: 8px 30px;
+        margin: 30px 0;
+        border-radius: 30px;
+        transition: background 0.5;
+    }
+    
+    .price-title {
+        font-style: italic;
+        font-size: 14px;
+    }
+    
+    .price {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .product-image {
+        width: 95%;
+    }
+    
+    .product-item,
+    .product-item:link,
+    .product-item:hover,
+    .product-item:visited {
+        text-decoration: none;
+        color: black;
+    }
+    
+    .item-container {
+        position: relative;
+        height: 100%;
+        padding-bottom: 50px;
+    }
+    
+    .item-info {
+        position: absolute;
+        bottom: 0px;
+        height: 50px;
+    }
+    
+    .label-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    
+    .product-detail-title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+    
+    .product-detail-image {
+        width: 100%
+    }
+</style>
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href=""><img src="/static/images/logo.png" width="125px"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li class="nav-item {% if not page %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'home' %}">HOME</a>
+                    </li>
+                    <li class="nav-item {% if page == 1 %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'products' %}">PRODUCTS</a>
+                    </li>
+                    <li class="nav-item {% if page == 2 %} active {% endif %}">
+                        <a class="nav-link" href="{%url 'about' %}">ABOUT</a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class='container pt-3'>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <h4>Đặt mua hàng trực tuyến</h4>
+        <table class="table table-form">
+            <tr>
+                <th colspan="2">
+                    <h5>Thông tin sản phẩm</h4>
+                </th>
+            </tr>
+            <tr>
+                <th>Sản phẩm:</th>
+                <td>
+                    <img src="/{{product.image}}" style="max-height: 200px;">
+                    <br>
+                    <span>{{ product.name }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th>Giá:</th>
+                <td>{{ product.price }} ₫</td>
+            </tr>
+
+            <tr>
+                <th colspan="2">
+                    <h5>Thông tin người mua hàng</h4>
+                </th>
+            </tr>
+            {{form}}
+        </table>
+        <button type='submit' class="btn btn-primary">Đặt mua</button>
+    </form>
+</div>
+<div class="footer ">
+    <div class="container ">
+        <div class="row ">
+            <div class="footer-col-1 ">
+                <h3>Usefull Links</h3>
+                <ul>
+                    <li> Coupons | Blog Post | Return policy | Join affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-2 ">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li> Facebook | Twitter | Instagram | YouTube</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright ">Shop đồng hồ</p>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+{% extends 'staff/base.html' %} {% block navbar %} {% with page=0 %} {{ block.super }} {% endwith %} {% endblock %} {% block content %}
+<div class="container pt-3">
+    <h3>Danh sách sản phẩm</h3>
+    <div class="text-right mb-3">
+        <a href='{% url "product-create" %}' class="btn btn-primary">Thêm sản phẩm</a>
+    </div>
+    {%if products %}
+    <table class="table table-bordered">
+        <tr>
+            <th style="width:4%" class="text-center">STT</th>
+            <th style="width:7%" class="text-center">Mã</th>
+            <th style="width:15%" class="text-center">Sản phẩm</th>
+            <th style="width:7%" class="text-center">Hãng sản xuất</th>
+            <th style="width:7%" class="text-center">Đường kính mặt đồng hồ(mm)</th>
+            <th style="width:7%" class="text-center">Giới tính</th>
+            <th style="width:7%" class="text-center">Chất liệu mặt đồng hồ</th>
+            <th style="width:7%" class="text-center">Chất liệu dây đồng hồ</th>
+            <th style="width:7%" class="text-center">Chất liệu vỏ</th>
+            <th style="width:7%" class="text-center">Giá</th>
+            <th style="width:10%" class="text-center">Thao tác</th>
+        </tr>
+        {% for p in products %}
+        <tr>
+            <td class="text-center">{{ forloop.counter }}</td>
+            <td class="text-center">{{ p.code }}</td>
+            <td class="text-center">{{ p.name }} <br> <img style="width:100%" src="/{{p.image}}"></td>
+            <td class="text-center">{{ p.manufacturer.name }}</td>
+            <td class="text-center">{{ p.diameter }}</td>
+            <td class="text-center">{{ p.sex }}</td>
+            <td class="text-center">{{ p.diameter_face }}</td>
+            <td class="text-center">{{ p.material_albert}}</td>
+            <td class="text-center">{{ p.material_case }}</td>
+            <td class="text-center">{{ p.price }}₫</td>
+            <td class="text-center">
+                <a title="Chỉnh sửa" href='{% url "product-update" p.id %}'><i class="fas fa-edit"></i></a> &nbsp;
+                <a title="Xóa" style="color:red" href='#' onclick="confirmDelete(this)" url='{% url "product-delete" p.id %}'>
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Không có dữ liệu</p>
+    {% endif %}
+</div>
+
+<script>
+    function confirmDelete(a) {
+        var url = a.getAttribute('url');
+        if (confirm('Bạn có chắc chắn muốn xóa không?')) {
+            location.href = url;
+        }
+    }
+</script>
+
+{% endblock %}

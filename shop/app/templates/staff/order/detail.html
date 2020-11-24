@@ -1,0 +1,78 @@
+<!--app/templates/order/detail.html-->
+{%extends "staff/base.html" %} {%block navbar%} {%with page=3%} {{block.super}} {%endwith%} {%endblock%} {%block content %}
+<div class="container">
+    <h3>Thông tin đơn hàng</h3>
+    <table class="table">
+        <tr>
+            <th>Ảnh sản phẩm</th>
+            <td>
+                <img src="/{{purchase.product.image}}" height="300px;">
+            </td>
+        </tr>
+        <tr>
+            <th style="width:30%">Sản phẩm: </th>
+            <td>{{ purchase.product.name }}</td>
+        </tr>
+        <tr>
+            <th>Số lượng:</th>
+            <td>{{purchase.qty}}</td>
+        </tr>
+        <tr>
+            <th>Giới tính</th>
+            <td>{{purchase.product.sex}}</td>
+        </tr>
+        <tr>
+            <th>Đường kính mặt đồng hồ:</th>
+            <td>{{purchase.product.diameter}} mm</td>
+        </tr>
+        <tr>
+            <th>Chất liệu dây:</th>
+            <td>{{purchase.product.material_albert}}</td>
+        </tr>
+        <tr>
+            <th>Chất liệu mặt:</th>
+            <td>{{purchase.product.diameter_face}}</td>
+        </tr>
+        <tr>
+            <th>Chất liệu vỏ:</th>
+            <td>{{purchase.product.material_case}}</td>
+        </tr>
+        <tr>
+            <th>Đơn giá:</th>
+            <td>{{purchase.product.price}}đ</td>
+        </tr>
+        <tr>
+            <th>Người mua hàng:</th>
+            <td>{{purchase.fullname}}</td>
+        </tr>
+        <tr>
+            <th>Số điện thoại:</th>
+            <td>{{purchase.phone}}</td>
+        </tr>
+        <tr>
+            <th>Địa chỉ:</th>
+            <td>{{purchase.address}}</td>
+        </tr>
+        <tr>
+            <th>Ngày đặt hàng:</th>
+            <td>{{purchase.dateOrder|date:" d/m/Y H:i:s "}}</td>
+        </tr>
+        {% if purchase.status == 2 %}
+        <tr>
+            <th>Ngày nhận hàng:</th>
+            <td>{{purchase.deliverDate|date:"d/m/Y H:i:s "}}</td>
+        </tr>
+        {%endif%}
+        <tr>
+            <th>Trạng thái:</th>
+            <td>
+                {% if purchase.status == 0 %} Đang chờ nhận hàng {%endif%} {% if purchase.status == 1 %} Đã nhận hàng {%endif%} {% if purchase.status == 2 %} Đã hủy {%endif%}
+            </td>
+        </tr>
+    </table>
+
+    {%if purchase.status == 0 %}
+    <a href="/confirm_order/{{purchase.id}} " class="btn btn-sm btn-primary ">Xác nhận hàng đã giao</a>
+    <a href="/cancel_order/{{purchase.id}} " class="btn btn-sm btn-danger ">Hủy đơn hàng</a> {%endif%}
+</div>
+{%endblock%}

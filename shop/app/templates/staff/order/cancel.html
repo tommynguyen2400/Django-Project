@@ -1,0 +1,10 @@
+{%extends "staff/base.html" %} {%block navbar%} {%with page=3%} {{block.super}} {%endwith%} {%endblock%} {%block content %}
+<form method="POST">
+    <div class="container mt-3">
+        {%csrf_token%}
+        <label style="color: red;">Bạn có chắc muốn hủy đơn hàng không?</label>
+        <br>
+        <button class="btn btn-danger" type="submit">Thực hiện</button>
+    </div>
+</form>
+{%endblock%}

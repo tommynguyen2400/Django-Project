@@ -1,0 +1,251 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/static/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,200&display=swap" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .navbar {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    nav {
+        flex: 1;
+        text-align: right;
+    }
+    
+    nav ul {
+        display: inline-block;
+        list-style-type: none;
+    }
+    
+    nav ul li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: white;
+    }
+    
+    p {
+        color: black;
+    }
+    
+    .container {
+        max-width: 1300px;
+        margin: auto;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    
+    .row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .col-2 {
+        flex-basis: 50%;
+        min-width: 500px;
+    }
+    
+    .col-2 img {
+        max-width: 100%;
+        padding: 50px 0;
+    }
+    
+    .col-2 h1 {
+        font-size: 50px;
+        line-height: 60px;
+        margin: 25px 0;
+    }
+    
+    .header {
+        background: radial-gradient(black, black);
+    }
+    
+    .header .row {
+        margin-top: 70px;
+    }
+    
+    .small-container {
+        max-width: 1080px;
+        margin: auto;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+    
+    h4 {
+        color: black;
+        font-weight: normal;
+    }
+    /*-------- footer ---------*/
+    
+    .footer {
+        background: black;
+        color: white;
+        font-size: 15px;
+        padding: 60px 0 20px;
+    }
+    
+    .footer p {
+        color: white;
+        margin-bottom: 20px;
+    }
+    
+    .footer-col-1,
+    footer-col-2 {
+        min-width: 200px;
+        margin-bottom: 10px;
+    }
+    
+    .footer-col-1 {
+        text-align: center;
+    }
+    
+    .footer-col-2 {
+        text-align: center;
+    }
+    
+    ul {
+        list-style-type: none;
+    }
+    
+    .footer hr {
+        border: none;
+        background: black;
+        height: 2px;
+        margin: 20px 0;
+    }
+    
+    .copyright {
+        text-align: center;
+    }
+    /*--------- all products --------*/
+    
+    .row-2 {
+        justify-content: space-between;
+        margin: 100px auto 50px;
+    }
+    
+    .price-title {
+        font-style: italic;
+        font-size: 14px;
+    }
+    
+    .price {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .btn {
+        display: inline-block;
+        background: rgb(83, 20, 255);
+        color: black;
+        padding: 8px 30px;
+        margin: 30px 0;
+        border-radius: 30px;
+        transition: background 0.5;
+    }
+</style>
+
+
+
+
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href=""><img src="/static/images/logo.png" width="125px"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li class="nav-item {% if not page %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'home' %}">HOME</a>
+                    </li>
+                    <li class="nav-item {% if page == 1 %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'products' %}">PRODUCTS</a>
+                    </li>
+                    <li class="nav-item {% if page == 2 %} active {% endif %}">
+                        <a class="nav-link" href="{%url 'about' %}">ABOUT</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class='container pt-3'>
+    <h4>Xác nhận thông tin mua hàng</h4>
+    <table class="table table-form">
+        <tr>
+            <th colspan="2">
+                <h5>Thông tin sản phẩm</h4>
+            </th>
+        </tr>
+        <tr>
+            <th>Sản phẩm:</th>
+            <td>
+                <span>{{ product.name }}</span>
+                <br>
+                <img src="/{{product.image}}" style="max-height: 200px;">
+            </td>
+        </tr>
+        <tr>
+            <th>Giá:</th>
+            <td>{{ product.price }} ₫</td>
+        </tr>
+
+        <tr>
+            <th colspan="2">
+                <h5>Thông tin người mua hàng</h4>
+            </th>
+        </tr>
+        <tr>
+            <th>Họ và tên:</th>
+            <td>{{ form.fullname }}</td>
+        </tr>
+        <tr>
+            <th>Số điện thoại:</th>
+            <td>{{ form.phone }}</td>
+        </tr>
+        <tr>
+            <th>Địa chỉ:</th>
+            <td>{{ form.address }}</td>
+        </tr>
+    </table>
+    <a href='{% url "thank-you" %}' class='btn btn-primary'>Xác nhận</a>
+</div>
+<div class="footer ">
+    <div class="container ">
+        <div class="row ">
+            <div class="footer-col-1 ">
+                <h3>Usefull Links</h3>
+                <ul>
+                    <li> Coupons | Blog Post | Return policy | Join affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-2 ">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li> Facebook | Twitter | Instagram | YouTube</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright ">Shop đồng hồ</p>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<!--app/templates/order/list.html-->
+{%extends "staff/base.html" %} {%block navbar%} {%with page=3%} {{block.super}} {%endwith%} {%endblock%} {%block content %}
+<div class="container pt-3">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="text-center">
+                <th>STT</th>
+                <th>Sản phẩm</th>
+                <th>Người mua</th>
+                <th>Ngày đặt hàng</th>
+                <th>Trạng thái</th>
+                <th>Chi tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for p in purchaseList %}
+            <tr>
+                <td class="text-center">{{ forloop.counter }}</td>
+                <td>{{ p.product.name }}</td>
+                <td>{{ p.fullname }}</td>
+                <td class="text-center">{{ p.dateOrder|date:"d/m/Y H:i:s"}}</td>
+                <td>
+                    {% if p.status == 0 %} Đang chờ nhận hàng {%endif%} {% if p.status == 1 %} Đã nhận hàng {%endif%} {% if p.status == 2 %} Đã hủy {%endif%}
+                </td>
+                <td class="text-center">
+                    <a href='/view_order/{{p.id}}' class='btn btn-sm btn-danger'>
+                Xem chi tiết
+              </a>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+{%endblock%}
