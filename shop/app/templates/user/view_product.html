@@ -490,7 +490,7 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <a href=""><img src="/static/images/logo.png" width="125px"></a>
+                <a href="{% url 'home'%}"><img src="/static/images/logo.png" width="125px"></a>
             </div>
             <nav>
                 <ul>
@@ -513,7 +513,6 @@
         <div class="col-2">
             <image class='product-detail-image' src="/{{product.image}}">
         </div>
-
         <div class="col-6 mt-5">
             <div class='product-detail-title'>{{product.name}}</div>
             <br>

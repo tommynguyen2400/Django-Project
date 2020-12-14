@@ -108,6 +108,6 @@ def cancelOrder(request, pk):
     if request.method == 'POST':
         purchase = Purchase.objects.get(pk=pk)
         purchase.status = Purchase.Status.CANCELED
-        purchase.delete()
+        purchase.save()
         return redirect('/list_order')
     return render(request, 'staff/order/cancel.html')   

@@ -66,7 +66,12 @@
         <tr>
             <th>Trạng thái:</th>
             <td>
-                {% if purchase.status == 0 %} Đang chờ nhận hàng {%endif%} {% if purchase.status == 1 %} Đã nhận hàng {%endif%} {% if purchase.status == 2 %} Đã hủy {%endif%}
+                {% if purchase.status == 0 %}
+                <p style="color: black;">Đang chờ nhận hàng</p>
+                {%endif%} {% if purchase.status == 1 %}
+                <p style="color: green;">Đã nhận hàng</p>
+                {%endif%} {% if purchase.status == 2 %}
+                <p style="color: red;">Đã hủy</p> {%endif%}
             </td>
         </tr>
     </table>

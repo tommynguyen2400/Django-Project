@@ -20,7 +20,10 @@
                 <td>{{ p.fullname }}</td>
                 <td class="text-center">{{ p.dateOrder|date:"d/m/Y H:i:s"}}</td>
                 <td>
-                    {% if p.status == 0 %} Đang chờ nhận hàng {%endif%} {% if p.status == 1 %} Đã nhận hàng {%endif%} {% if p.status == 2 %} Đã hủy {%endif%}
+                    {% if p.status == 0 %}
+                    <b style="color: black;">Đang chờ nhận hàng</b> {%endif%} {% if p.status == 1 %}
+                    <b style="color: green;">Đã nhận hàng</b> {%endif%} {% if p.status == 2 %}
+                    <b style="color: red;">Đã hủy</b> {%endif%}
                 </td>
                 <td class="text-center">
                     <a href='/view_order/{{p.id}}' class='btn btn-sm btn-danger'>
